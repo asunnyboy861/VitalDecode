@@ -1,0 +1,92 @@
+{
+  "identifier" : "VitalDecode",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "79.99",
+      "familyShareable" : false,
+      "internalID" : "lifetime_001",
+      "localizations" : [
+        {
+          "description" : "Pay once, use forever",
+          "displayName" : "VitalDecode Lifetime",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.zzoutuo.VitalDecode.lifetime",
+      "referenceName" : "Lifetime Access",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "VitalDecode_Pro",
+      "localizations" : [],
+      "name" : "VitalDecode Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "monthly_001",
+          "introductoryOffer" : {
+            "internalID" : "trial_001",
+            "paymentMode" : "free",
+            "subscriptionDuration" : "1 month",
+            "subscriptionPrice" : "0.00"
+          },
+          "localizations" : [
+            {
+              "description" : "Unlimited scans and AI insights",
+              "displayName" : "VitalDecode Pro Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.zzoutuo.VitalDecode.proMonthly",
+          "recurringSubscriptionPeriod" : "1 month",
+          "referenceName" : "Monthly Premium",
+          "subscriptionGroupID" : "VitalDecode_Pro",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "annual_001",
+          "introductoryOffer" : {
+            "internalID" : "trial_annual_001",
+            "paymentMode" : "free",
+            "subscriptionDuration" : "1 year",
+            "subscriptionPrice" : "0.00"
+          },
+          "localizations" : [
+            {
+              "description" : "Best value: full access all year",
+              "displayName" : "VitalDecode Pro Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.zzoutuo.VitalDecode.proAnnual",
+          "recurringSubscriptionPeriod" : "1 year",
+          "referenceName" : "Yearly Premium",
+          "subscriptionGroupID" : "VitalDecode_Pro",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

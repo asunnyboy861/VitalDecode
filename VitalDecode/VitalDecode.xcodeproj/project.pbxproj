@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		6AA2C3952FA81E2E0035D3CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AA2C37F2FA81E2D0035D3CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AA2C3862FA81E2D0035D3CA;
+			remoteInfo = VitalDecode;
+		};
+		6AA2C39F2FA81E2E0035D3CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AA2C37F2FA81E2D0035D3CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6AA2C3862FA81E2D0035D3CA;
+			remoteInfo = VitalDecode;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6AA2C3872FA81E2D0035D3CA /* VitalDecode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VitalDecode.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA2C3942FA81E2E0035D3CA /* VitalDecodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VitalDecodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA2C39E2FA81E2E0035D3CA /* VitalDecodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VitalDecodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6AA2C3892FA81E2D0035D3CA /* VitalDecode */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = VitalDecode;
+			sourceTree = "<group>";
+		};
+		6AA2C3972FA81E2E0035D3CA /* VitalDecodeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = VitalDecodeTests;
+			sourceTree = "<group>";
+		};
+		6AA2C3A12FA81E2E0035D3CA /* VitalDecodeUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = VitalDecodeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6AA2C3842FA81E2D0035D3CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C3912FA81E2E0035D3CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C39B2FA81E2E0035D3CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6AA2C37E2FA81E2D0035D3CA = {
+			isa = PBXGroup;
+			children = (
+				6AA2C3892FA81E2D0035D3CA /* VitalDecode */,
+				6AA2C3972FA81E2E0035D3CA /* VitalDecodeTests */,
+				6AA2C3A12FA81E2E0035D3CA /* VitalDecodeUITests */,
+				6AA2C3882FA81E2D0035D3CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6AA2C3882FA81E2D0035D3CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AA2C3872FA81E2D0035D3CA /* VitalDecode.app */,
+				6AA2C3942FA81E2E0035D3CA /* VitalDecodeTests.xctest */,
+				6AA2C39E2FA81E2E0035D3CA /* VitalDecodeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6AA2C3862FA81E2D0035D3CA /* VitalDecode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA2C3A82FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecode" */;
+			buildPhases = (
+				6AA2C3832FA81E2D0035D3CA /* Sources */,
+				6AA2C3842FA81E2D0035D3CA /* Frameworks */,
+				6AA2C3852FA81E2D0035D3CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6AA2C3892FA81E2D0035D3CA /* VitalDecode */,
+			);
+			name = VitalDecode;
+			packageProductDependencies = (
+			);
+			productName = VitalDecode;
+			productReference = 6AA2C3872FA81E2D0035D3CA /* VitalDecode.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6AA2C3932FA81E2E0035D3CA /* VitalDecodeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA2C3AB2FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecodeTests" */;
+			buildPhases = (
+				6AA2C3902FA81E2E0035D3CA /* Sources */,
+				6AA2C3912FA81E2E0035D3CA /* Frameworks */,
+				6AA2C3922FA81E2E0035D3CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AA2C3962FA81E2E0035D3CA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6AA2C3972FA81E2E0035D3CA /* VitalDecodeTests */,
+			);
+			name = VitalDecodeTests;
+			packageProductDependencies = (
+			);
+			productName = VitalDecodeTests;
+			productReference = 6AA2C3942FA81E2E0035D3CA /* VitalDecodeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6AA2C39D2FA81E2E0035D3CA /* VitalDecodeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AA2C3AE2FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecodeUITests" */;
+			buildPhases = (
+				6AA2C39A2FA81E2E0035D3CA /* Sources */,
+				6AA2C39B2FA81E2E0035D3CA /* Frameworks */,
+				6AA2C39C2FA81E2E0035D3CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6AA2C3A02FA81E2E0035D3CA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6AA2C3A12FA81E2E0035D3CA /* VitalDecodeUITests */,
+			);
+			name = VitalDecodeUITests;
+			packageProductDependencies = (
+			);
+			productName = VitalDecodeUITests;
+			productReference = 6AA2C39E2FA81E2E0035D3CA /* VitalDecodeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6AA2C37F2FA81E2D0035D3CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2640;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					6AA2C3862FA81E2D0035D3CA = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					6AA2C3932FA81E2E0035D3CA = {
+						CreatedOnToolsVersion = 26.4.1;
+						TestTargetID = 6AA2C3862FA81E2D0035D3CA;
+					};
+					6AA2C39D2FA81E2E0035D3CA = {
+						CreatedOnToolsVersion = 26.4.1;
+						TestTargetID = 6AA2C3862FA81E2D0035D3CA;
+					};
+				};
+			};
+			buildConfigurationList = 6AA2C3822FA81E2D0035D3CA /* Build configuration list for PBXProject "VitalDecode" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6AA2C37E2FA81E2D0035D3CA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6AA2C3882FA81E2D0035D3CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6AA2C3862FA81E2D0035D3CA /* VitalDecode */,
+				6AA2C3932FA81E2E0035D3CA /* VitalDecodeTests */,
+				6AA2C39D2FA81E2E0035D3CA /* VitalDecodeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6AA2C3852FA81E2D0035D3CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C3922FA81E2E0035D3CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C39C2FA81E2E0035D3CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6AA2C3832FA81E2D0035D3CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C3902FA81E2E0035D3CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6AA2C39A2FA81E2E0035D3CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6AA2C3962FA81E2E0035D3CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AA2C3862FA81E2D0035D3CA /* VitalDecode */;
+			targetProxy = 6AA2C3952FA81E2E0035D3CA /* PBXContainerItemProxy */;
+		};
+		6AA2C3A02FA81E2E0035D3CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6AA2C3862FA81E2D0035D3CA /* VitalDecode */;
+			targetProxy = 6AA2C39F2FA81E2E0035D3CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6AA2C3A62FA81E2E0035D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6AA2C3A72FA81E2E0035D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6AA2C3A92FA81E2E0035D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VitalDecode/VitalDecode.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "VitalDecode needs camera access to scan your blood test reports.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads lab result data from Health to provide analysis.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode saves analyzed lab results to Health for tracking.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "VitalDecode needs photo library access to upload PDF blood test reports.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6AA2C3AA2FA81E2E0035D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VitalDecode/VitalDecode.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "VitalDecode needs camera access to scan your blood test reports.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads lab result data from Health to provide analysis.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode saves analyzed lab results to Health for tracking.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "VitalDecode needs photo library access to upload PDF blood test reports.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6AA2C3AC2FA81E2E0035D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode.VitalDecodeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VitalDecode.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VitalDecode";
+			};
+			name = Debug;
+		};
+		6AA2C3AD2FA81E2E0035D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode.VitalDecodeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VitalDecode.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VitalDecode";
+			};
+			name = Release;
+		};
+		6AA2C3AF2FA81E2E0035D3CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode.VitalDecodeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VitalDecode;
+			};
+			name = Debug;
+		};
+		6AA2C3B02FA81E2E0035D3CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JP4TN5PTS3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zzoutuo.VitalDecode.VitalDecodeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = VitalDecode;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6AA2C3822FA81E2D0035D3CA /* Build configuration list for PBXProject "VitalDecode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA2C3A62FA81E2E0035D3CA /* Debug */,
+				6AA2C3A72FA81E2E0035D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA2C3A82FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA2C3A92FA81E2E0035D3CA /* Debug */,
+				6AA2C3AA2FA81E2E0035D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA2C3AB2FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecodeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA2C3AC2FA81E2E0035D3CA /* Debug */,
+				6AA2C3AD2FA81E2E0035D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6AA2C3AE2FA81E2E0035D3CA /* Build configuration list for PBXNativeTarget "VitalDecodeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA2C3AF2FA81E2E0035D3CA /* Debug */,
+				6AA2C3B02FA81E2E0035D3CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6AA2C37F2FA81E2D0035D3CA /* Project object */;
+}
