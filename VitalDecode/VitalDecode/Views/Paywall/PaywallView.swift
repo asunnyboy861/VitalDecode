@@ -6,6 +6,8 @@ struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedTier: StoreManager.SubscriptionTier = .annual
     @State private var isPurchasing = false
+    @State private var showError = false
+    @State private var errorMessage = ""
 
     var body: some View {
         NavigationStack {
@@ -78,7 +80,7 @@ struct PaywallView: View {
                     .disabled(isPurchasing)
 
                     Button("Restore Purchases") {
-                        Task { await storeManager.restorePurchases() }
+                        Task { await restorePurchases() }
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -94,6 +96,11 @@ struct PaywallView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close") { dismiss() }
                 }
+            }
+            .alert("Purchase Error", isPresented: $showError) {
+                Button("OK") {}
+            } message: {
+                Text(errorMessage)
             }
         }
     }
@@ -163,14 +170,37 @@ struct PaywallView: View {
     }
 
     private func purchase() {
-        guard let product = storeManager.products.first(where: { $0.id == selectedTier.rawValue }) else { return }
+        guard let product = storeManager.products.first(where: { $0.id == selectedTier.rawValue }) else {
+            errorMessage = "Product not available. Please try again later."
+            showError = true
+            return
+        }
         isPurchasing = true
         Task {
             let success = await storeManager.purchase(product)
             isPurchasing = false
             if success {
+                // Ensure subscription status is updated before dismissing
+                await storeManager.refreshSubscriptionStatus()
+                // Small delay to ensure UI updates
+                try? await Task.sleep(nanoseconds: 200_000_000) // 0.2 second
                 dismiss()
+            } else {
+                // Purchase was cancelled or failed
+                errorMessage = "Purchase was not completed. Please try again."
+                showError = true
             }
+        }
+    }
+
+    private func restorePurchases() async {
+        await storeManager.restorePurchases()
+        // Check if restoration was successful
+        if storeManager.isPro {
+            dismiss()
+        } else {
+            errorMessage = "No previous purchases found."
+            showError = true
         }
     }
 }

@@ -75,6 +75,11 @@ final class StoreManager {
         } catch {}
     }
 
+    // MARK: - Public method to refresh subscription status
+    func refreshSubscriptionStatus() async {
+        await updatePurchasedProducts()
+    }
+
     private func listenForTransactions() -> Task<Void, Never> {
         Task.detached { [weak self] in
             for await result in Transaction.updates {

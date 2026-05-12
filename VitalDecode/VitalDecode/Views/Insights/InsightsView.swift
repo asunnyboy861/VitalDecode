@@ -7,6 +7,7 @@ struct InsightsView: View {
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var showPaywall = false
+    @State private var refreshTrigger = false
 
     let userProfile: UserProfile
     let storeManager: StoreManager
@@ -54,11 +55,7 @@ struct InsightsView: View {
                 .padding(.horizontal)
 
             Button {
-                if storeManager.isPro {
-                    Task { await runAnalysis() }
-                } else {
-                    showPaywall = true
-                }
+                handleAnalyzeButtonTap()
             } label: {
                 Label("Analyze My Results", systemImage: "sparkles")
                     .frame(maxWidth: .infinity)
@@ -68,8 +65,31 @@ struct InsightsView: View {
             .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
             .padding(.horizontal)
         }
-        .sheet(isPresented: $showPaywall) {
+        .sheet(isPresented: $showPaywall, onDismiss: {
+            // Refresh subscription status when paywall is dismissed
+            Task { await storeManager.refreshSubscriptionStatus() }
+            // If user is now Pro and no analysis yet, auto-run analysis
+            if storeManager.isPro && analysis == nil && !isLoading {
+                Task { await runAnalysis() }
+            }
+        }) {
             PaywallView(storeManager: storeManager)
+        }
+    }
+
+    private func handleAnalyzeButtonTap() {
+        // First refresh subscription status to ensure we have latest data
+        Task {
+            await storeManager.refreshSubscriptionStatus()
+
+            // Small delay to ensure state is updated
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 second
+
+            if storeManager.isPro {
+                await runAnalysis()
+            } else {
+                showPaywall = true
+            }
         }
     }
 
@@ -100,33 +120,36 @@ struct InsightsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
-        .padding(12)
+        .padding()
         .background(Color.orange.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     private func runAnalysis() async {
         guard let report = latestReport else { return }
-        isLoading = true
-        defer { isLoading = false }
 
-        let service = AIAnalysisService()
+        isLoading = true
+        errorMessage = nil
+
         do {
+            let service = AIAnalysisService()
             analysis = try await service.analyze(biomarkers: report.biomarkers, userProfile: userProfile)
         } catch {
             errorMessage = error.localizedDescription
         }
+
+        isLoading = false
     }
 }
 
-private struct InsightSection: View {
+struct InsightSection: View {
     let icon: String
     let title: String
     let color: Color
     let items: [String]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: icon)
                     .foregroundStyle(color)
@@ -134,19 +157,21 @@ private struct InsightSection: View {
                     .font(.headline)
             }
 
-            ForEach(items, id: \.self) { item in
-                HStack(alignment: .top, spacing: 8) {
-                    Text("•")
-                        .foregroundStyle(color)
-                    Text(item)
-                        .font(.subheadline)
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(items, id: \.self) { item in
+                    HStack(alignment: .top, spacing: 8) {
+                        Image(systemName: "circle.fill")
+                            .font(.system(size: 6))
+                            .foregroundStyle(color)
+                            .padding(.top, 6)
+                        Text(item)
+                            .font(.subheadline)
+                    }
                 }
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.systemBackground))
+        .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(color: .black.opacity(0.03), radius: 3, y: 1)
     }
 }
