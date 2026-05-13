@@ -9,6 +9,7 @@ struct SettingsView: View {
     @Bindable var bindableProfile: UserProfile
     let storeManager: StoreManager
     let healthKitManager: HealthKitManager
+    let aiConsentManager: AIConsentManager
 
     @State private var apiKey = UserDefaults.standard.string(forKey: "openai_api_key") ?? ""
     @State private var showDeleteConfirmation = false
@@ -74,6 +75,12 @@ struct SettingsView: View {
                 Text("Enter your OpenAI API key to enable AI insights, or upgrade to Pro.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+            }
+            if aiConsentManager.hasConsented {
+                Button("Reset AI Data Consent") {
+                    aiConsentManager.revokeConsent()
+                }
+                .foregroundStyle(.orange)
             }
         }
     }

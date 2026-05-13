@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalDecode - Sample Blood Test Report</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px 20px; color: #333; line-height: 1.6; }
+        .header { text-align: center; border-bottom: 2px solid #00b4d8; padding-bottom: 20px; margin-bottom: 30px; }
+        .warning { background-color: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 30px; }
+        h1 { color: #00b4d8; margin-bottom: 5px; }
+        h2 { color: #0077b6; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; }
+        .reference { color: #666; font-size: 0.9em; }
+        .footer { margin-top: 40px; text-align: center; color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>VITALDECODE - SAMPLE REPORT</h1>
+        <p><strong>(Test Data - Not Real Patient)</strong></p>
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ SAMPLE DATA ONLY</strong><br>
+        This is a sample blood test report for demonstration purposes only.<br>
+        No real patient data is contained in this document.
+    </div>
+
+    <p><strong>Patient:</strong> Sample Patient<br>
+    <strong>Date:</strong> 05/01/2026<br>
+    <strong>Lab:</strong> Quest Diagnostics<br>
+    <strong>Report ID:</strong> SAMPLE-2026-0501-001</p>
+
+    <h2>Complete Blood Count (CBC)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>WBC (White Blood Cell)</td>
+                <td>7.2</td>
+                <td>K/uL</td>
+                <td class="reference">4.0 - 11.0</td>
+            </tr>
+            <tr>
+                <td>RBC (Red Blood Cell)</td>
+                <td>4.8</td>
+                <td>M/uL</td>
+                <td class="reference">4.5 - 5.5</td>
+            </tr>
+            <tr>
+                <td>Hemoglobin</td>
+                <td>14.5</td>
+                <td>g/dL</td>
+                <td class="reference">12.0 - 17.5</td>
+            </tr>
+            <tr>
+                <td>Hematocrit</td>
+                <td>42.0</td>
+                <td>%</td>
+                <td class="reference">36.0 - 48.0</td>
+            </tr>
+            <tr>
+                <td>Platelets</td>
+                <td>250</td>
+                <td>K/uL</td>
+                <td class="reference">150 - 400</td>
+            </tr>
+            <tr>
+                <td>MCV</td>
+                <td>88</td>
+                <td>fL</td>
+                <td class="reference">80 - 100</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Metabolic Panel</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Glucose (Fasting)</td>
+                <td>95</td>
+                <td>mg/dL</td>
+                <td class="reference">70 - 100</td>
+            </tr>
+            <tr>
+                <td>Creatinine</td>
+                <td>0.9</td>
+                <td>mg/dL</td>
+                <td class="reference">0.6 - 1.2</td>
+            </tr>
+            <tr>
+                <td>BUN (Blood Urea Nitrogen)</td>
+                <td>15</td>
+                <td>mg/dL</td>
+                <td class="reference">7 - 20</td>
+            </tr>
+            <tr>
+                <td>ALT (Alanine Transaminase)</td>
+                <td>25</td>
+                <td>U/L</td>
+                <td class="reference">7 - 56</td>
+            </tr>
+            <tr>
+                <td>AST (Aspartate Transaminase)</td>
+                <td>22</td>
+                <td>U/L</td>
+                <td class="reference">10 - 40</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Lipid Panel</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Total Cholesterol</td>
+                <td>210</td>
+                <td>mg/dL</td>
+                <td class="reference">&lt; 200</td>
+            </tr>
+            <tr>
+                <td>LDL Cholesterol</td>
+                <td>130</td>
+                <td>mg/dL</td>
+                <td class="reference">&lt; 100</td>
+            </tr>
+            <tr>
+                <td>HDL Cholesterol</td>
+                <td>55</td>
+                <td>mg/dL</td>
+                <td class="reference">&gt; 40</td>
+            </tr>
+            <tr>
+                <td>Triglycerides</td>
+                <td>150</td>
+                <td>mg/dL</td>
+                <td class="reference">&lt; 150</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Thyroid Panel</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TSH (Thyroid Stimulating Hormone)</td>
+                <td>2.5</td>
+                <td>mIU/L</td>
+                <td class="reference">0.4 - 4.0</td>
+            </tr>
+            <tr>
+                <td>Free T4</td>
+                <td>1.2</td>
+                <td>ng/dL</td>
+                <td class="reference">0.8 - 1.8</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Vitamin Levels</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Unit</th>
+                <th>Reference Range</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Vitamin D (25-OH)</td>
+                <td>32</td>
+                <td>ng/mL</td>
+                <td class="reference">30 - 100</td>
+            </tr>
+            <tr>
+                <td>Vitamin B12</td>
+                <td>450</td>
+                <td>pg/mL</td>
+                <td class="reference">200 - 900</td>
+            </tr>
+            <tr>
+                <td>Iron</td>
+                <td>85</td>
+                <td>mcg/dL</td>
+                <td class="reference">60 - 170</td>
+            </tr>
+            <tr>
+                <td>Ferritin</td>
+                <td>80</td>
+                <td>ng/mL</td>
+                <td class="reference">20 - 200</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>This sample report is provided for testing and demonstration purposes only.</p>
+        <p>VitalDecode - Your Personal Blood Test Analyzer</p>
+    </div>
+</body>
+</html>

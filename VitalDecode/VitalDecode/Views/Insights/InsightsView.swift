@@ -3,23 +3,29 @@ import SwiftData
 
 struct InsightsView: View {
     @Query(sort: \BloodTestReport.scanDate, order: .reverse) private var reports: [BloodTestReport]
-    @State private var analysis: AIAnalysisService.AIAnalysis?
+    @State private var currentAnalysis: AIAnalysisService.AIAnalysis?
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var showPaywall = false
-    @State private var refreshTrigger = false
+    @State private var showAIConsent = false
+    @State private var showNoAPIKeyAlert = false
 
     let userProfile: UserProfile
     let storeManager: StoreManager
+    let aiConsentManager: AIConsentManager
 
     private var latestReport: BloodTestReport? { reports.first }
+
+    private var hasAPIKey: Bool {
+        !(UserDefaults.standard.string(forKey: "openai_api_key") ?? "").isEmpty
+    }
 
     var body: some View {
         NavigationStack {
             Group {
                 if reports.first != nil {
-                    if let analysis {
-                        analysisContent(analysis)
+                    if currentAnalysis != nil {
+                        analysisContentView
                     } else if isLoading {
                         ProgressView("Analyzing your results...")
                             .padding()
@@ -35,6 +41,17 @@ struct InsightsView: View {
                 }
             }
             .navigationTitle("AI Insights")
+            .sheet(isPresented: $showAIConsent) {
+                AIConsentView {
+                    aiConsentManager.recordConsent()
+                    proceedWithAnalysis()
+                }
+            }
+            .alert("API Key Required", isPresented: $showNoAPIKeyAlert) {
+                Button("OK") {}
+            } message: {
+                Text("To use AI analysis, please enter your OpenAI API key in Settings, or upgrade to Pro.")
+            }
         }
     }
 
@@ -66,10 +83,8 @@ struct InsightsView: View {
             .padding(.horizontal)
         }
         .sheet(isPresented: $showPaywall, onDismiss: {
-            // Refresh subscription status when paywall is dismissed
             Task { await storeManager.refreshSubscriptionStatus() }
-            // If user is now Pro and no analysis yet, auto-run analysis
-            if storeManager.isPro && analysis == nil && !isLoading {
+            if storeManager.isPro && currentAnalysis == nil && !isLoading {
                 Task { await runAnalysis() }
             }
         }) {
@@ -78,37 +93,54 @@ struct InsightsView: View {
     }
 
     private func handleAnalyzeButtonTap() {
-        // First refresh subscription status to ensure we have latest data
+        let canAnalyze = storeManager.isPro || hasAPIKey
+
+        if !canAnalyze {
+            showPaywall = true
+            return
+        }
+
+        if !aiConsentManager.hasConsented {
+            showAIConsent = true
+            return
+        }
+
+        proceedWithAnalysis()
+    }
+
+    private func proceedWithAnalysis() {
         Task {
             await storeManager.refreshSubscriptionStatus()
 
-            // Small delay to ensure state is updated
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 second
-
-            if storeManager.isPro {
-                await runAnalysis()
-            } else {
-                showPaywall = true
+            await MainActor.run {
+                if storeManager.isPro || hasAPIKey {
+                    Task { await runAnalysis() }
+                } else {
+                    showPaywall = true
+                }
             }
         }
     }
 
-    private func analysisContent(_ analysis: AIAnalysisService.AIAnalysis) -> some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                InsightSection(icon: "text.bubble", title: "Summary", color: .blue, items: [analysis.summary])
+    @ViewBuilder
+    private var analysisContentView: some View {
+        if let analysis = currentAnalysis {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    InsightSection(icon: "text.bubble", title: "Summary", color: .blue, items: [analysis.summary])
 
-                InsightSection(icon: "magnifyingglass", title: "Key Findings", color: .orange, items: analysis.keyFindings)
+                    InsightSection(icon: "magnifyingglass", title: "Key Findings", color: .orange, items: analysis.keyFindings)
 
-                InsightSection(icon: "link", title: "Correlations", color: .purple, items: analysis.correlations)
+                    InsightSection(icon: "link", title: "Correlations", color: .purple, items: analysis.correlations)
 
-                InsightSection(icon: "lightbulb", title: "Recommendations", color: .green, items: analysis.recommendations)
+                    InsightSection(icon: "lightbulb", title: "Recommendations", color: .green, items: analysis.recommendations)
 
-                InsightSection(icon: "checkmark.circle", title: "Action Items", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.actionItems)
+                    InsightSection(icon: "checkmark.circle", title: "Action Items", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.actionItems)
 
-                disclaimerView
+                    disclaimerView
+                }
+                .padding()
             }
-            .padding()
         }
     }
 
@@ -133,7 +165,7 @@ struct InsightsView: View {
 
         do {
             let service = AIAnalysisService()
-            analysis = try await service.analyze(biomarkers: report.biomarkers, userProfile: userProfile)
+            currentAnalysis = try await service.analyze(biomarkers: report.biomarkers, userProfile: userProfile)
         } catch {
             errorMessage = error.localizedDescription
         }
