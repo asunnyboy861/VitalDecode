@@ -20,6 +20,10 @@ struct InsightsView: View {
         !(UserDefaults.standard.string(forKey: "openai_api_key") ?? "").isEmpty
     }
 
+    private var canAnalyzeWithoutPaywall: Bool {
+        storeManager.isPro || hasAPIKey
+    }
+
     var body: some View {
         NavigationStack {
             Group {
@@ -27,8 +31,7 @@ struct InsightsView: View {
                     if currentAnalysis != nil {
                         analysisContentView
                     } else if isLoading {
-                        ProgressView("Analyzing your results...")
-                            .padding()
+                        loadingView
                     } else {
                         startAnalysisView
                     }
@@ -41,61 +44,83 @@ struct InsightsView: View {
                 }
             }
             .navigationTitle("AI Insights")
-            .sheet(isPresented: $showAIConsent) {
-                AIConsentView {
-                    aiConsentManager.recordConsent()
-                    proceedWithAnalysis()
-                }
+        }
+        .sheet(isPresented: $showAIConsent) {
+            AIConsentView {
+                aiConsentManager.recordConsent()
+                runAnalysis()
             }
-            .alert("API Key Required", isPresented: $showNoAPIKeyAlert) {
-                Button("OK") {}
-            } message: {
-                Text("To use AI analysis, please enter your OpenAI API key in Settings, or upgrade to Pro.")
+        }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView(storeManager: storeManager)
+        }
+        .alert("API Key Required", isPresented: $showNoAPIKeyAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("To use AI analysis, please enter your OpenAI API key in Settings, or upgrade to Pro.")
+        }
+        .onChange(of: showPaywall) { _, newValue in
+            if !newValue {
+                Task {
+                    await storeManager.refreshSubscriptionStatus()
+                }
             }
         }
     }
 
-    private var startAnalysisView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "brain.head.profile")
-                .font(.system(size: 48))
-                .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
-
-            Text("Get AI-Powered Insights")
-                .font(.title2)
-                .bold()
-
-            Text("Understand your blood test results in plain English with personalized recommendations.")
+    private var loadingView: some View {
+        VStack(spacing: 16) {
+            ProgressView()
+                .scaleEffect(1.5)
+                .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
+            Text("Analyzing your results...")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
-
-            Button {
-                handleAnalyzeButtonTap()
-            } label: {
-                Label("Analyze My Results", systemImage: "sparkles")
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
-            .padding(.horizontal)
         }
-        .sheet(isPresented: $showPaywall, onDismiss: {
-            Task { await storeManager.refreshSubscriptionStatus() }
-            if storeManager.isPro && currentAnalysis == nil && !isLoading {
-                Task { await runAnalysis() }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var startAnalysisView: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                Image(systemName: "brain.head.profile")
+                    .font(.system(size: 56))
+                    .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
+
+                Text("Get AI-Powered Insights")
+                    .font(.title2)
+                    .bold()
+
+                Text("Understand your blood test results in plain English with personalized recommendations.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+
+                Button(action: handleAnalyzeButtonTap) {
+                    Label("Analyze My Results", systemImage: "sparkles")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 52)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
+                .padding(.horizontal, 32)
+
+                Text("Requires Pro subscription or API key")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
             }
-        }) {
-            PaywallView(storeManager: storeManager)
+            .padding(.vertical, 40)
         }
     }
 
     private func handleAnalyzeButtonTap() {
-        let canAnalyze = storeManager.isPro || hasAPIKey
+        guard !isLoading else { return }
 
-        if !canAnalyze {
+        if !canAnalyzeWithoutPaywall {
             showPaywall = true
             return
         }
@@ -105,21 +130,7 @@ struct InsightsView: View {
             return
         }
 
-        proceedWithAnalysis()
-    }
-
-    private func proceedWithAnalysis() {
-        Task {
-            await storeManager.refreshSubscriptionStatus()
-
-            await MainActor.run {
-                if storeManager.isPro || hasAPIKey {
-                    Task { await runAnalysis() }
-                } else {
-                    showPaywall = true
-                }
-            }
-        }
+        runAnalysis()
     }
 
     @ViewBuilder
@@ -138,6 +149,12 @@ struct InsightsView: View {
                     InsightSection(icon: "checkmark.circle", title: "Action Items", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.actionItems)
 
                     disclaimerView
+
+                    Button("Re-analyze") {
+                        currentAnalysis = nil
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.top, 8)
                 }
                 .padding()
             }
@@ -157,20 +174,27 @@ struct InsightsView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
-    private func runAnalysis() async {
+    private func runAnalysis() {
         guard let report = latestReport else { return }
 
         isLoading = true
         errorMessage = nil
 
-        do {
-            let service = AIAnalysisService()
-            currentAnalysis = try await service.analyze(biomarkers: report.biomarkers, userProfile: userProfile)
-        } catch {
-            errorMessage = error.localizedDescription
+        Task {
+            do {
+                let service = AIAnalysisService()
+                let result = try await service.analyze(biomarkers: report.biomarkers, userProfile: userProfile)
+                await MainActor.run {
+                    currentAnalysis = result
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                    isLoading = false
+                }
+            }
         }
-
-        isLoading = false
     }
 }
 
