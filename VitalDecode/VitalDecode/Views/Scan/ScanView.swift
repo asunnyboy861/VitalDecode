@@ -87,15 +87,16 @@ struct ScanView: View {
 
                 VStack(spacing: 4) {
                     HStack(spacing: 4) {
-                        Image(systemName: "info.circle")
+                        Image(systemName: "exclamationmark.triangle.fill")
                             .font(.caption2)
-                        Text("VitalDecode is a data visualization tool, not a medical device.")
+                            .foregroundStyle(.orange)
+                        Text("VitalDecode is a data reference tool, not a medical device.")
                             .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(.secondary)
                     }
-                    Text("Always consult a qualified healthcare professional for medical interpretation of lab results.")
+                    Text("Always seek a doctor's advice in addition to using this app and before making any medical decisions.")
                         .font(.caption2)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal, 32)

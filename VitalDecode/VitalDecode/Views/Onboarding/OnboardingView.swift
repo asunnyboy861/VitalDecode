@@ -3,6 +3,9 @@ import SwiftUI
 struct OnboardingView: View {
     @Binding var hasCompletedOnboarding: Bool
     @State private var currentPage = 0
+    @State private var hasAcceptedDisclaimer = false
+
+    private let totalPages = 4
 
     var body: some View {
         TabView(selection: $currentPage) {
@@ -14,21 +17,23 @@ struct OnboardingView: View {
 
             onboardingPage(
                 icon: "chart.bar.doc.horizontal",
-                title: "Decode Every Number",
-                subtitle: "See your results with dual ranges: standard vs. optimal. Know when 'normal' isn't your best."
+                title: "Compare to Reference Ranges",
+                subtitle: "See your results compared to standard and optimal reference ranges. Know which values are in range."
             ).tag(1)
 
             onboardingPage(
                 icon: "brain.head.profile",
-                title: "Get AI Insights",
-                subtitle: "Understand what your numbers mean in plain English with personalized recommendations."
+                title: "Get Data Insights",
+                subtitle: "Compare your numbers to reference ranges and get topics to discuss with your healthcare provider."
             ).tag(2)
+
+            disclaimerPage.tag(3)
         }
         .tabViewStyle(.page(indexDisplayMode: .always))
         .indexViewStyle(.page(backgroundDisplayMode: .always))
         .overlay(alignment: .bottom) {
             VStack(spacing: 16) {
-                if currentPage < 2 {
+                if currentPage < totalPages - 1 {
                     Button("Next") {
                         withAnimation { currentPage += 1 }
                     }
@@ -36,12 +41,13 @@ struct OnboardingView: View {
                     .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
                     .controlSize(.large)
                 } else {
-                    Button("Get Started") {
+                    Button("I Understand & Get Started") {
                         hasCompletedOnboarding = true
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
                     .controlSize(.large)
+                    .disabled(!hasAcceptedDisclaimer)
                 }
 
                 if currentPage > 0 {
@@ -52,6 +58,54 @@ struct OnboardingView: View {
                 }
             }
             .padding(.bottom, 50)
+        }
+    }
+
+    private var disclaimerPage: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 56))
+                .foregroundStyle(.orange)
+
+            Text("Important Disclaimer")
+                .font(.largeTitle)
+                .bold()
+                .multilineTextAlignment(.center)
+
+            VStack(alignment: .leading, spacing: 16) {
+                DisclaimerRow(
+                    icon: "stethoscope",
+                    color: .red,
+                    title: "Not a Medical Device",
+                    description: "VitalDecode is a data reference tool. It does not provide medical diagnosis, treatment advice, or health assessments."
+                )
+
+                DisclaimerRow(
+                    icon: "person.badge.shield.checkmark",
+                    color: .blue,
+                    title: "Consult Your Doctor",
+                    description: "Always seek a doctor's advice in addition to using this app and before making any medical decisions."
+                )
+
+                DisclaimerRow(
+                    icon: "chart.bar",
+                    color: .green,
+                    title: "Reference Ranges Only",
+                    description: "Reference ranges shown are for data comparison purposes only and do not constitute medical interpretation of your lab results."
+                )
+            }
+            .padding(.horizontal, 24)
+
+            Toggle(isOn: $hasAcceptedDisclaimer) {
+                Text("I understand this is not a medical device and I should consult a healthcare professional for medical advice.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 32)
+
+            Spacer()
         }
     }
 
@@ -76,5 +130,35 @@ struct OnboardingView: View {
 
             Spacer()
         }
+    }
+}
+
+struct DisclaimerRow: View {
+    let icon: String
+    let color: Color
+    let title: String
+    let description: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+                .foregroundStyle(color)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+
+                Text(description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }

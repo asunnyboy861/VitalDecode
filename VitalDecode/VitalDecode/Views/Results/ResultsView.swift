@@ -58,16 +58,16 @@ struct ResultsView: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 6) {
-                        Image(systemName: "exclamationmark.triangle")
+                        Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundStyle(.orange)
-                        Text("This app is a data visualization tool and does not provide medical diagnosis or treatment advice.")
+                        Text("VitalDecode is a data reference tool and does not provide medical diagnosis or treatment advice.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     HStack(spacing: 6) {
                         Image(systemName: "person.badge.shield.checkmark")
                             .foregroundStyle(.blue)
-                        Text("Reference ranges are for informational purposes only. Always consult a qualified healthcare professional for medical interpretation of lab results.")
+                        Text("Always seek a doctor's advice in addition to using this app and before making any medical decisions.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -83,21 +83,21 @@ struct ResultsView: View {
                 let optimal = grouped[.optimal] ?? []
 
                 if !needsAttention.isEmpty {
-                    CategoryHeader(title: "Outside Standard Range", color: .red, icon: "exclamationmark.triangle.fill")
+                    CategoryHeader(title: "Outside Reference Range", color: .red, icon: "exclamationmark.triangle.fill")
                     ForEach(needsAttention) { biomarker in
                         BiomarkerRowView(biomarker: biomarker)
                     }
                 }
 
                 if !slightlyOff.isEmpty {
-                    CategoryHeader(title: "Slightly Outside Standard Range", color: .orange, icon: "bolt.fill")
+                    CategoryHeader(title: "Slightly Outside Optimal Range", color: .orange, icon: "bolt.fill")
                     ForEach(slightlyOff) { biomarker in
                         BiomarkerRowView(biomarker: biomarker)
                     }
                 }
 
                 if !normal.isEmpty {
-                    CategoryHeader(title: "Within Standard Range", color: .blue, icon: "checkmark.circle.fill")
+                    CategoryHeader(title: "Within Reference Range", color: .blue, icon: "checkmark.circle.fill")
                     ForEach(normal) { biomarker in
                         BiomarkerRowView(biomarker: biomarker)
                     }

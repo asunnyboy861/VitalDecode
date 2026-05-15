@@ -87,18 +87,18 @@ struct InsightsView: View {
                     .font(.system(size: 56))
                     .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
 
-                Text("Get AI-Powered Insights")
+                Text("Get AI-Powered Data Comparison")
                     .font(.title2)
                     .bold()
 
-                Text("Understand your blood test results in plain English with personalized recommendations.")
+                Text("Compare your blood test results to standard reference ranges and get topics to discuss with your healthcare provider.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
 
                 Button(action: handleAnalyzeButtonTap) {
-                    Label("Analyze My Results", systemImage: "sparkles")
+                    Label("Compare My Results", systemImage: "sparkles")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
@@ -152,7 +152,7 @@ struct InsightsView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "info.circle")
                                 .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
-                            Text("Built-in Analysis — Add your OpenAI API key in Settings for deeper AI-powered insights")
+                            Text("Built-in Comparison — Add your OpenAI API key in Settings for deeper AI-powered data comparison")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -164,16 +164,16 @@ struct InsightsView: View {
 
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(spacing: 6) {
-                            Image(systemName: "exclamationmark.triangle")
+                            Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundStyle(.orange)
-                            Text("This analysis is for informational purposes only and does not constitute medical advice.")
+                            Text("VitalDecode is a data reference tool, not a medical device. This comparison does not constitute medical advice.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                         HStack(spacing: 6) {
                             Image(systemName: "person.badge.shield.checkmark")
                                 .foregroundStyle(.blue)
-                            Text("VitalDecode is a data visualization tool, not a medical device. Always consult a qualified healthcare professional.")
+                            Text("Always seek a doctor's advice in addition to using this app and before making any medical decisions.")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -184,17 +184,17 @@ struct InsightsView: View {
 
                     InsightSection(icon: "text.bubble", title: "Summary", color: .blue, items: [analysis.summary])
 
-                    InsightSection(icon: "magnifyingglass", title: "Key Findings", color: .orange, items: analysis.keyFindings)
+                    InsightSection(icon: "magnifyingglass", title: "Data Observations", color: .orange, items: analysis.keyFindings)
 
-                    InsightSection(icon: "link", title: "Correlations", color: .purple, items: analysis.correlations)
+                    InsightSection(icon: "link", title: "Related Markers", color: .purple, items: analysis.correlations)
 
-                    InsightSection(icon: "lightbulb", title: "Recommendations", color: .green, items: analysis.recommendations)
+                    InsightSection(icon: "stethoscope", title: "Topics to Discuss with Your Doctor", color: .green, items: analysis.topicsToDiscuss)
 
-                    InsightSection(icon: "checkmark.circle", title: "Action Items", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.actionItems)
+                    InsightSection(icon: "arrow.right.circle", title: "Suggested Next Steps", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.suggestedNextSteps)
 
                     citationsView
 
-                    Button("Re-analyze") {
+                    Button("Re-compare") {
                         currentAnalysis = nil
                     }
                     .buttonStyle(.bordered)
@@ -210,11 +210,11 @@ struct InsightsView: View {
             HStack {
                 Image(systemName: "book")
                     .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
-                Text("Medical Information Sources")
+                Text("Reference Range Sources")
                     .font(.headline)
             }
 
-            Text("The health information and recommendations in this analysis are based on established medical guidelines from authoritative sources:")
+            Text("The reference ranges used for data comparison are based on established clinical laboratory reference intervals from authoritative sources:")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -226,7 +226,7 @@ struct InsightsView: View {
                 CitationLink(title: "World Health Organization (WHO)", url: "https://www.who.int/health-topics")
             }
 
-            Text("Reference ranges used in this app are based on standard clinical laboratory reference intervals as published by the above organizations and peer-reviewed medical literature.")
+            Text("Reference ranges used in this app are based on standard clinical laboratory reference intervals as published by the above organizations and peer-reviewed medical literature. These ranges are for data comparison purposes only and do not constitute medical interpretation.")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
                 .padding(.top, 4)

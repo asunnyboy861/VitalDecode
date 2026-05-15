@@ -23,6 +23,17 @@ struct BiomarkerRowView: View {
         }
     }
 
+    private var statusLabel: String {
+        switch biomarker.status {
+        case .criticalLow: return "Below Range"
+        case .criticalHigh: return "Above Range"
+        case .low: return "Slightly Low"
+        case .high: return "Slightly High"
+        case .normal: return "In Range"
+        case .optimal: return "Optimal"
+        }
+    }
+
     private var positionInOptimalRange: CGFloat {
         let range = biomarker.referenceHigh - biomarker.referenceLow
         guard range > 0 else { return 0.5 }
@@ -50,9 +61,18 @@ struct BiomarkerRowView: View {
                         .font(.title3)
                         .bold()
                         .foregroundStyle(statusColor)
-                    Text(biomarker.unit)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
+                    HStack(spacing: 2) {
+                        Text(biomarker.unit)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                        Text("·")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                        Text(statusLabel)
+                            .font(.caption2)
+                            .bold()
+                            .foregroundStyle(statusColor)
+                    }
                 }
             }
 
