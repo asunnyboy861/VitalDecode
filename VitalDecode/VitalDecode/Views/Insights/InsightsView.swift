@@ -162,6 +162,26 @@ struct InsightsView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
 
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundStyle(.orange)
+                            Text("This analysis is for informational purposes only and does not constitute medical advice.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        HStack(spacing: 6) {
+                            Image(systemName: "person.badge.shield.checkmark")
+                                .foregroundStyle(.blue)
+                            Text("VitalDecode is a data visualization tool, not a medical device. Always consult a qualified healthcare professional.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+
                     InsightSection(icon: "text.bubble", title: "Summary", color: .blue, items: [analysis.summary])
 
                     InsightSection(icon: "magnifyingglass", title: "Key Findings", color: .orange, items: analysis.keyFindings)
@@ -171,8 +191,6 @@ struct InsightsView: View {
                     InsightSection(icon: "lightbulb", title: "Recommendations", color: .green, items: analysis.recommendations)
 
                     InsightSection(icon: "checkmark.circle", title: "Action Items", color: Color(red: 0/255, green: 180/255, blue: 216/255), items: analysis.actionItems)
-
-                    disclaimerView
 
                     citationsView
 
@@ -185,19 +203,6 @@ struct InsightsView: View {
                 .padding()
             }
         }
-    }
-
-    private var disclaimerView: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Image(systemName: "exclamationmark.triangle")
-                .foregroundStyle(.orange)
-            Text("This analysis is for informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-        .padding()
-        .background(Color.orange.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     private var citationsView: some View {

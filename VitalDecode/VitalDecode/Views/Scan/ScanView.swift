@@ -85,6 +85,21 @@ struct ScanView: View {
                 }
                 .foregroundStyle(.secondary)
 
+                VStack(spacing: 4) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "info.circle")
+                            .font(.caption2)
+                        Text("VitalDecode is a data visualization tool, not a medical device.")
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                    Text("Always consult a qualified healthcare professional for medical interpretation of lab results.")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.horizontal, 32)
+
                 Spacer()
             }
             .navigationTitle("VitalDecode")

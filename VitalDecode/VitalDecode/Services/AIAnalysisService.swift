@@ -68,7 +68,7 @@ actor AIAnalysisService {
         }.joined(separator: "\n")
 
         let prompt = """
-        You are a health data analyst. Analyze the following blood test results and provide insights in plain English. Do NOT provide medical diagnosis or treatment advice. This is for informational purposes only.
+        You are a data visualization assistant that helps users understand their blood test report data. Analyze the following blood test results and provide informational insights in plain English. Do NOT provide medical diagnosis or treatment advice. This is for informational purposes only.
 
         User Profile: Age \(userProfile.age), Gender \(userProfile.gender.rawValue)
 
@@ -78,9 +78,9 @@ actor AIAnalysisService {
         Provide your analysis as JSON with these fields:
         - summary: A 2-3 sentence plain English overview of the results
         - keyFindings: Array of 3-5 key findings, each as a short sentence
-        - correlations: Array of 2-3 correlations between biomarkers (e.g., "Your ferritin and CRP suggest possible inflammation affecting iron storage")
-        - recommendations: Array of 3-5 actionable lifestyle recommendations (diet, exercise, supplements to discuss with doctor)
-        - actionItems: Array of 2-3 specific next steps (e.g., "Discuss Vitamin D supplementation with your healthcare provider")
+        - correlations: Array of 2-3 correlations between biomarkers (e.g., "Ferritin and CRP values suggest a pattern worth discussing with your healthcare provider")
+        - recommendations: Array of 3-5 general lifestyle topics to discuss with a healthcare provider (diet, exercise, supplements)
+        - actionItems: Array of 2-3 specific next steps (e.g., "Discuss Vitamin D levels with your healthcare provider")
 
         Return ONLY valid JSON, no markdown.
         """
@@ -95,7 +95,7 @@ actor AIAnalysisService {
         let body: [String: Any] = [
             "model": "gpt-4o-mini",
             "messages": [
-                ["role": "system", "content": "You are a health data analyst providing informational analysis of blood test results. Never provide medical diagnosis or treatment advice. Always recommend consulting a healthcare professional."],
+                ["role": "system", "content": "You are a data visualization assistant helping users understand their blood test report data. Never provide medical diagnosis or treatment advice. Always recommend consulting a healthcare professional. This is informational only."],
                 ["role": "user", "content": prompt]
             ],
             "temperature": 0.3,
@@ -150,14 +150,14 @@ actor AIAnalysisService {
         let summary: String
         if critical.isEmpty && slightlyOff.isEmpty {
             if !optimal.isEmpty {
-                summary = "Your blood test results look great! All \(biomarkers.count) biomarkers are within healthy ranges, with \(optimal.count) at optimal levels. Keep up your current lifestyle habits."
+                summary = "All \(biomarkers.count) biomarkers are within standard ranges, with \(optimal.count) within optimal ranges."
             } else {
-                summary = "Your blood test results are within standard ranges. All \(biomarkers.count) biomarkers measured fall within normal reference ranges. Consider discussing optimal ranges with your healthcare provider."
+                summary = "All \(biomarkers.count) biomarkers measured fall within standard reference ranges."
             }
         } else if !critical.isEmpty {
-            summary = "Your blood test shows \(critical.count) biomarker(s) that need immediate attention and \(slightlyOff.count) slightly outside optimal range. Please consult your healthcare provider to discuss these results."
+            summary = "Your blood test shows \(critical.count) biomarker(s) outside standard ranges and \(slightlyOff.count) slightly outside standard ranges. Please consult your healthcare provider to discuss these results."
         } else {
-            summary = "Your blood test shows \(slightlyOff.count) biomarker(s) slightly outside the optimal range, but none in critical zones. All \(normal.count + optimal.count) other markers are within normal ranges."
+            summary = "Your blood test shows \(slightlyOff.count) biomarker(s) slightly outside standard ranges. All \(normal.count + optimal.count) other markers are within standard ranges."
         }
 
         var keyFindings: [String] = []
@@ -185,18 +185,18 @@ actor AIAnalysisService {
         if ironRelated.count >= 2 {
             let outOfRange = ironRelated.filter { $0.status != .normal && $0.status != .optimal }
             if !outOfRange.isEmpty {
-                correlations.append("Your iron-related markers (\(outOfRange.map(\.canonicalName).joined(separator: ", "))) show patterns that may indicate iron metabolism changes — discuss with your doctor")
+                correlations.append("Iron-related markers (\(outOfRange.map(\.canonicalName).joined(separator: ", "))) show patterns worth discussing with your healthcare provider")
             }
         }
 
         let inflammatory = biomarkers.filter { ["CRP", "ESR", "Homocysteine"].contains($0.canonicalName) && ($0.status == .high || $0.status == .criticalHigh) }
         if !inflammatory.isEmpty {
-            correlations.append("Elevated inflammatory marker(s) (\(inflammatory.map(\.canonicalName).joined(separator: ", "))) may be related to other out-of-range values")
+            correlations.append("Inflammatory marker(s) (\(inflammatory.map(\.canonicalName).joined(separator: ", "))) are outside standard ranges and may be related to other values")
         }
 
         let metabolic = biomarkers.filter { ["Glucose", "HbA1c", "Insulin"].contains($0.canonicalName) && ($0.status != .normal && $0.status != .optimal) }
         if metabolic.count >= 2 {
-            correlations.append("Multiple metabolic markers (\(metabolic.map(\.canonicalName).joined(separator: ", "))) are outside optimal range, which may indicate metabolic patterns worth discussing with your provider")
+            correlations.append("Multiple metabolic markers (\(metabolic.map(\.canonicalName).joined(separator: ", "))) are outside standard ranges, which may indicate patterns worth discussing with your provider")
         }
 
         if correlations.isEmpty {
@@ -207,24 +207,24 @@ actor AIAnalysisService {
 
         let vitaminD = biomarkers.first { $0.canonicalName == "Vitamin D" }
         if let vd = vitaminD, vd.status == .low || vd.status == .criticalLow {
-            recommendations.append("Your Vitamin D is low — consider discussing supplementation and sun exposure with your healthcare provider")
+            recommendations.append("Vitamin D is outside standard range — discuss with your healthcare provider")
         }
 
         let b12 = biomarkers.first { $0.canonicalName == "Vitamin B12" }
         if let b = b12, b.status == .low || b.status == .criticalLow {
-            recommendations.append("Vitamin B12 is below optimal — dietary sources like fish, meat, and dairy, or supplements, may help (consult your doctor)")
+            recommendations.append("Vitamin B12 is outside standard range — discuss with your healthcare provider")
         }
 
         if !ironRelated.filter({ $0.status == .low || $0.status == .criticalLow }).isEmpty {
-            recommendations.append("Low iron markers detected — iron-rich foods (red meat, spinach, legumes) and Vitamin C for absorption may help; consult your provider before supplementing")
+            recommendations.append("Low iron markers detected — discuss with your provider before making dietary changes")
         }
 
         if !inflammatory.isEmpty {
-            recommendations.append("Elevated inflammatory markers — consider anti-inflammatory foods (fatty fish, berries, leafy greens) and discuss with your doctor")
+            recommendations.append("Elevated inflammatory markers — discuss with your healthcare provider")
         }
 
         if !metabolic.isEmpty {
-            recommendations.append("Metabolic markers outside optimal range — balanced diet, regular exercise, and limiting refined sugars may help; consult your provider")
+            recommendations.append("Metabolic markers outside standard range — discuss with your provider")
         }
 
         if recommendations.isEmpty {

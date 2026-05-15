@@ -21,10 +21,10 @@ struct HealthScoreView: View {
         if score >= 40 { return .orange }
         return .red }
     private var scoreMessage: String {
-        if score >= 80 { return "Great results! A few areas to optimize." }
-        if score >= 60 { return "Good overall, some areas to improve." }
-        if score >= 40 { return "Several markers need attention." }
-        return "Important: Discuss these results with your doctor."
+        if score >= 80 { return "Most markers within standard ranges." }
+        if score >= 60 { return "Some markers outside standard ranges." }
+        if score >= 40 { return "Several markers outside standard ranges." }
+        return "Many markers outside standard ranges. Review with your healthcare provider."
     }
 
     var body: some View {
@@ -43,12 +43,21 @@ struct HealthScoreView: View {
             }
             .frame(width: 120, height: 120)
 
-            Text("Health Score")
+            Text("Overview")
                 .font(.headline)
             Text(scoreMessage)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
+
+            HStack(spacing: 4) {
+                Image(systemName: "info.circle")
+                    .font(.caption2)
+                Text("This is a data visualization tool, not a medical device.")
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(.top, 2)
         }
         .padding()
         .frame(maxWidth: .infinity)
