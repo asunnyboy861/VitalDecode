@@ -64,6 +64,16 @@ struct ScanView: View {
                     }
                     .buttonStyle(.bordered)
                     .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
+
+                    Button {
+                        loadSampleReport()
+                    } label: {
+                        Label("Load Sample Report", systemImage: "doc.text.magnifyingglass")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(Color(red: 0/255, green: 180/255, blue: 216/255))
                 }
                 .padding(.horizontal, 32)
 
@@ -187,5 +197,77 @@ struct ScanView: View {
         if !storeManager.isPro {
             userProfile.incrementFreeScan()
         }
+    }
+
+    private func loadSampleReport() {
+        let report = BloodTestReport(
+            labName: "Sample Lab — Demo Report",
+            sourceType: .manual,
+            rawOCRText: "Sample Blood Test Report for demonstration purposes",
+            ocrConfidence: 1.0
+        )
+
+        let sampleData: [(String, Double, Biomarker.BiomarkerCategory)] = [
+            ("WBC", 6.2, .completeBloodCount),
+            ("RBC", 4.8, .completeBloodCount),
+            ("Hemoglobin", 14.5, .completeBloodCount),
+            ("Hematocrit", 44, .completeBloodCount),
+            ("MCV", 90, .completeBloodCount),
+            ("Platelets", 250, .completeBloodCount),
+            ("Glucose", 92, .metabolicPanel),
+            ("HbA1c", 5.3, .metabolicPanel),
+            ("BUN", 15, .metabolicPanel),
+            ("Creatinine", 0.95, .metabolicPanel),
+            ("eGFR", 105, .kidney),
+            ("Sodium", 140, .metabolicPanel),
+            ("Potassium", 4.1, .metabolicPanel),
+            ("Calcium", 9.5, .metabolicPanel),
+            ("Total Cholesterol", 185, .lipidPanel),
+            ("LDL Cholesterol", 95, .lipidPanel),
+            ("HDL Cholesterol", 62, .lipidPanel),
+            ("Triglycerides", 110, .lipidPanel),
+            ("ALT", 22, .liver),
+            ("AST", 18, .liver),
+            ("ALP", 75, .liver),
+            ("Albumin", 4.5, .liver),
+            ("Total Protein", 7.0, .liver),
+            ("TSH", 2.1, .thyroid),
+            ("Free T4", 1.2, .thyroid),
+            ("Vitamin D", 28, .vitamins),
+            ("Vitamin B12", 380, .vitamins),
+            ("Iron", 75, .iron),
+            ("Ferritin", 45, .iron),
+            ("CRP", 1.5, .inflammation),
+            ("Testosterone", 520, .hormones),
+            ("Cortisol", 12.5, .hormones),
+            ("DHEA-S", 210, .hormones),
+        ]
+
+        for (name, value, category) in sampleData {
+            guard let definition = BiomarkerDefinitions.find(matching: name) else { continue }
+            let status = BiomarkerDefinitions.calculateStatus(
+                value: value,
+                refLow: definition.referenceLow,
+                refHigh: definition.referenceHigh,
+                optLow: definition.optimalLow,
+                optHigh: definition.optimalHigh
+            )
+            let biomarker = Biomarker(
+                name: name,
+                canonicalName: definition.canonicalName,
+                value: value,
+                unit: definition.unit,
+                referenceLow: definition.referenceLow,
+                referenceHigh: definition.referenceHigh,
+                optimalLow: definition.optimalLow,
+                optimalHigh: definition.optimalHigh,
+                status: status,
+                category: category
+            )
+            biomarker.report = report
+            report.biomarkers.append(biomarker)
+        }
+
+        modelContext.insert(report)
     }
 }

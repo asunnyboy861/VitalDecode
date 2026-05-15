@@ -150,11 +150,11 @@ struct PaywallView: View {
     private var featureList: some View {
         VStack(alignment: .leading, spacing: 12) {
             featureRow(icon: "infinity", text: "Unlimited Scans")
-            featureRow(icon: "brain.head.profile", text: "AI-Powered Insights")
+            featureRow(icon: "brain.head.profile", text: "Built-in Health Insights")
             featureRow(icon: "chart.line.uptrend.xyaxis", text: "Trend Tracking")
             featureRow(icon: "person.2", text: "Multi-Profile Support")
             featureRow(icon: "square.and.arrow.up", text: "PDF & CSV Export")
-            featureRow(icon: "heart.text.square", text: "HealthKit Integration")
+            featureRow(icon: "heart.text.square", text: "Apple Health Integration")
         }
         .padding()
     }

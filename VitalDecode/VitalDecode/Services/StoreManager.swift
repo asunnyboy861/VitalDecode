@@ -80,6 +80,14 @@ final class StoreManager {
         await updatePurchasedProducts()
     }
 
+    // MARK: - App Review: Reset subscription state for testing
+    func resetSubscriptionState() async {
+        purchasedProductIDs.removeAll()
+        isPro = false
+        UserDefaults.standard.removeObject(forKey: "storekit_review_reset")
+        UserDefaults.standard.set(Date(), forKey: "storekit_review_reset")
+    }
+
     private func listenForTransactions() -> Task<Void, Never> {
         Task.detached { [weak self] in
             for await result in Transaction.updates {

@@ -402,8 +402,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "VitalDecode needs camera access to scan your blood test reports.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads lab result data from Health to provide analysis.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode saves analyzed lab results to Health for tracking.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads health data (blood glucose, heart rate, blood pressure, body measurements) from Apple Health to provide a complete wellness analysis.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode does not write data to Apple Health. This permission is reserved for future features.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "VitalDecode needs photo library access to upload PDF blood test reports.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -439,8 +439,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "VitalDecode needs camera access to scan your blood test reports.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads lab result data from Health to provide analysis.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode saves analyzed lab results to Health for tracking.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalDecode reads health data (blood glucose, heart rate, blood pressure, body measurements) from Apple Health to provide a complete wellness analysis.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "VitalDecode does not write data to Apple Health. This permission is reserved for future features.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "VitalDecode needs photo library access to upload PDF blood test reports.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

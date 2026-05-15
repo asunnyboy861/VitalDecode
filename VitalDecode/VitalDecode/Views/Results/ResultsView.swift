@@ -47,6 +47,15 @@ struct ResultsView: View {
             VStack(spacing: 20) {
                 HealthScoreView(biomarkers: report.biomarkers)
 
+                HStack(spacing: 6) {
+                    Image(systemName: "heart.text.square")
+                        .foregroundStyle(.red)
+                    Text("Results analyzed by VitalDecode. Connect Apple Health in Settings for integrated health tracking.")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.horizontal, 4)
+
                 let grouped = Dictionary(grouping: report.biomarkers) { $0.status }
                 let needsAttention = (grouped[.criticalHigh] ?? []) + (grouped[.criticalLow] ?? [])
                 let slightlyOff = (grouped[.high] ?? []) + (grouped[.low] ?? [])

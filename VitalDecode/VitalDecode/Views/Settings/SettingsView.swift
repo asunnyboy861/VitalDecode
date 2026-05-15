@@ -62,6 +62,14 @@ struct SettingsView: View {
             Button("Restore Purchases") {
                 Task { await storeManager.restorePurchases() }
             }
+            if storeManager.isPro {
+                Button("Reset Subscription (App Review)") {
+                    Task {
+                        await storeManager.resetSubscriptionState()
+                    }
+                }
+                .foregroundStyle(.orange)
+            }
         }
     }
 
@@ -86,24 +94,55 @@ struct SettingsView: View {
     }
 
     private var healthKitSection: some View {
-        Section("HealthKit") {
+        Section {
             if healthKitManager.isAvailable {
                 HStack {
-                    Text("Connected")
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(.red)
+                    Text("Apple Health (HealthKit)")
+                        .font(.subheadline)
                     Spacer()
-                    Text(healthKitManager.isAuthorized ? "Yes" : "No")
+                    Text(healthKitManager.isAuthorized ? "Connected" : "Not Connected")
                         .foregroundStyle(healthKitManager.isAuthorized ? .green : .secondary)
+                        .font(.caption)
                 }
+
+                if healthKitManager.isAuthorized {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Label("Reads blood glucose, heart rate, blood pressure, and body measurements from Apple Health", systemImage: "arrow.down.circle")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Label("Your blood test results are stored locally on your device", systemImage: "lock.shield")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 2)
+                }
+
                 if !healthKitManager.isAuthorized {
-                    Button("Enable HealthKit") {
+                    Button("Connect Apple Health") {
                         Task {
                             _ = try? await healthKitManager.requestAuthorization()
                         }
                     }
+                    Text("VitalDecode reads health data from Apple Health to provide a complete picture of your wellness. No data is written to Apple Health.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             } else {
-                Text("HealthKit is not available on this device")
-                    .foregroundStyle(.secondary)
+                HStack {
+                    Image(systemName: "heart.slash")
+                        .foregroundStyle(.secondary)
+                    Text("Apple Health is not available on this device")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        } header: {
+            HStack(spacing: 4) {
+                Text("Apple Health")
+                Image(systemName: "heart.text.square")
+                    .foregroundStyle(.red)
             }
         }
     }
@@ -147,6 +186,13 @@ struct SettingsView: View {
         let activityVC = UIActivityViewController(activityItems: [tempURL], applicationActivities: nil)
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootVC = windowScene.windows.first?.rootViewController {
+            activityVC.popoverPresentationController?.sourceView = rootVC.view
+            activityVC.popoverPresentationController?.sourceRect = CGRect(
+                x: rootVC.view.bounds.midX,
+                y: rootVC.view.bounds.midY,
+                width: 0,
+                height: 0
+            )
             rootVC.present(activityVC, animated: true)
         }
     }
