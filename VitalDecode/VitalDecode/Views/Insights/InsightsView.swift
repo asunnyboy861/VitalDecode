@@ -35,11 +35,11 @@ struct InsightsView: View {
                     ContentUnavailableView(
                         "No Reports Yet",
                         systemImage: "brain.head.profile",
-                        description: Text("Scan a blood test first to get AI insights")
+                        description: Text("Scan a blood test first to get data comparison")
                     )
                 }
             }
-            .navigationTitle("AI Insights")
+            .navigationTitle("Data Comparison")
         }
         .sheet(isPresented: $showAIConsent) {
             AIConsentView {
@@ -110,7 +110,7 @@ struct InsightsView: View {
                 .disabled(isLoading)
 
                 if hasAPIKey {
-                    Label("AI-powered analysis with your API key", systemImage: "bolt.fill")
+                    Label("AI-powered data comparison with your API key", systemImage: "bolt.fill")
                         .font(.caption)
                         .foregroundStyle(.green)
                 } else if storeManager.isPro {
@@ -122,7 +122,7 @@ struct InsightsView: View {
                         Text("Free: 1 built-in analysis included")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text("Add an OpenAI API key in Settings for AI-powered insights")
+                        Text("Add an OpenAI API key in Settings for AI-powered data comparison")
                             .font(.caption2)
                             .foregroundStyle(.tertiary)
                     }
@@ -152,7 +152,7 @@ struct InsightsView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "info.circle")
                                 .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
-                            Text("Built-in Comparison — Add your OpenAI API key in Settings for deeper AI-powered data comparison")
+                            Text("Built-in Comparison — Add your OpenAI API key in Settings for deeper AI-powered comparison")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

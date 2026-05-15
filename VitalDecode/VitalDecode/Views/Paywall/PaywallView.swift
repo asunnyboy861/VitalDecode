@@ -21,7 +21,7 @@ struct PaywallView: View {
                         .font(.title)
                         .bold()
 
-                    Text("Get unlimited scans, AI insights, trend tracking, and more.")
+                    Text("Get unlimited scans, data comparison, trend tracking, and more.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -150,7 +150,7 @@ struct PaywallView: View {
     private var featureList: some View {
         VStack(alignment: .leading, spacing: 12) {
             featureRow(icon: "infinity", text: "Unlimited Scans")
-            featureRow(icon: "brain.head.profile", text: "Built-in Health Insights")
+            featureRow(icon: "brain.head.profile", text: "Built-in Data Comparison")
             featureRow(icon: "chart.line.uptrend.xyaxis", text: "Trend Tracking")
             featureRow(icon: "person.2", text: "Multi-Profile Support")
             featureRow(icon: "square.and.arrow.up", text: "PDF & CSV Export")

@@ -74,13 +74,13 @@ struct SettingsView: View {
     }
 
     private var aiSection: some View {
-        Section("AI Analysis") {
+        Section("AI Data Comparison") {
             SecureField("OpenAI API Key", text: $apiKey)
                 .onChange(of: apiKey) { _, newValue in
                     UserDefaults.standard.set(newValue, forKey: "openai_api_key")
                 }
             if apiKey.isEmpty {
-                Text("Enter your OpenAI API key to enable AI insights, or upgrade to Pro.")
+                Text("Enter your OpenAI API key to enable AI data comparison, or upgrade to Pro.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -125,7 +125,7 @@ struct SettingsView: View {
                             _ = try? await healthKitManager.requestAuthorization()
                         }
                     }
-                    Text("VitalDecode reads health data from Apple Health to provide a complete picture of your wellness. No data is written to Apple Health.")
+                    Text("VitalDecode reads data from Apple Health to display alongside your lab results. No data is written to Apple Health.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

@@ -32,7 +32,7 @@ struct AIConsentView: View {
                 .font(.system(size: 56))
                 .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
 
-            Text("Before Your Data is Analyzed")
+            Text("Before Your Data is Compared")
                 .font(.title2)
                 .bold()
                 .multilineTextAlignment(.center)
@@ -40,7 +40,7 @@ struct AIConsentView: View {
     }
 
     private var descriptionSection: some View {
-        Text("To provide AI-powered insights, VitalDecode sends your health information to OpenAI. Please review the details below before continuing.")
+        Text("To provide AI-powered data comparison, VitalDecode sends your biomarker data to OpenAI. Please review the details below before continuing.")
             .font(.subheadline)
             .foregroundStyle(.secondary)
             .multilineTextAlignment(.center)
@@ -57,7 +57,7 @@ struct AIConsentView: View {
             ConsentItem(
                 icon: "building.2.fill",
                 title: "Who Receives Your Data",
-                description: "OpenAI (api.openai.com) processes this data to generate health insights for you"
+                description: "OpenAI (api.openai.com) processes this data to generate data comparisons for you"
             )
 
             ConsentItem(
@@ -69,7 +69,7 @@ struct AIConsentView: View {
             ConsentItem(
                 icon: "person.crop.circle.badge.checkmark",
                 title: "Your Control",
-                description: "You can revoke this permission anytime in Settings → AI Analysis"
+                description: "You can revoke this permission anytime in Settings → AI Data Comparison"
             )
         }
     }

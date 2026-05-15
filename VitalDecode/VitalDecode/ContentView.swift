@@ -34,7 +34,7 @@ struct ContentView: View {
                 aiConsentManager: aiConsentManager
             )
             .tabItem {
-                Label("Insights", systemImage: "brain.head.profile")
+                Label("Compare", systemImage: "brain.head.profile")
             }
             .tag(3)
 

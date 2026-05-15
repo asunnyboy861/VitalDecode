@@ -39,7 +39,7 @@ actor AIAnalysisService {
         var errorDescription: String? {
             switch self {
             case .invalidAPIKey:
-                return "An OpenAI API key is required for AI-powered analysis. Please enter your key in Settings, or use the built-in analysis instead."
+                return "An OpenAI API key is required for AI-powered data comparison. Please enter your key in Settings, or use the built-in comparison instead."
             case .requestFailed(let detail):
                 return "Analysis request failed: \(detail). Please check your API key and try again."
             case .decodingFailed:
