@@ -60,14 +60,14 @@ struct ResultsView: View {
                     HStack(spacing: 6) {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundStyle(.orange)
-                        Text("VitalDecode is a data reference tool and does not provide medical diagnosis or treatment advice.")
+                        Text("This app is not intended to diagnose, treat, cure, or prevent any disease or medical condition.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     HStack(spacing: 6) {
                         Image(systemName: "person.badge.shield.checkmark")
                             .foregroundStyle(.blue)
-                        Text("Always seek a doctor's advice in addition to using this app and before making any medical decisions.")
+                        Text("Users of this app must seek a doctor's advice in addition to using this app and before making any medical decisions.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

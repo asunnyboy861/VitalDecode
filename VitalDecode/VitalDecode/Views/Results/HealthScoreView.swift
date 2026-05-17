@@ -70,7 +70,7 @@ struct HealthScoreView: View {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.caption2)
                     .foregroundStyle(.orange)
-                Text("This is a data reference tool, not a medical device. Consult a healthcare professional for medical interpretation.")
+                Text("This app is not intended to diagnose, treat, cure, or prevent any disease or medical condition.")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

@@ -79,14 +79,14 @@ struct OnboardingView: View {
                     icon: "stethoscope",
                     color: .red,
                     title: "Not a Medical Device",
-                    description: "VitalDecode is a data reference tool. It does not provide medical diagnosis, treatment advice, or health assessments."
+                    description: "This app is not intended to diagnose, treat, cure, or prevent any disease or medical condition."
                 )
 
                 DisclaimerRow(
                     icon: "person.badge.shield.checkmark",
                     color: .blue,
                     title: "Consult Your Doctor",
-                    description: "Always seek a doctor's advice in addition to using this app and before making any medical decisions."
+                    description: "Users of this app must seek a doctor's advice in addition to using this app and before making any medical decisions."
                 )
 
                 DisclaimerRow(
@@ -99,7 +99,7 @@ struct OnboardingView: View {
             .padding(.horizontal, 24)
 
             Toggle(isOn: $hasAcceptedDisclaimer) {
-                Text("I understand this is not a medical device and I should consult a healthcare professional for medical advice.")
+                Text("I understand this app is not a medical device and I should consult a healthcare professional for medical advice.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

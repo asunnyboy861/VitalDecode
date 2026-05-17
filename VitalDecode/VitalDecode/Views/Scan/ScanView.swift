@@ -25,7 +25,7 @@ struct ScanView: View {
                     .foregroundStyle(Color(red: 0/255, green: 180/255, blue: 216/255))
 
                 VStack(spacing: 8) {
-                    Text("Scan Your Blood Test")
+                    Text("Scan Your Lab Report")
                         .font(.title2)
                         .bold()
 
@@ -90,11 +90,11 @@ struct ScanView: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .font(.caption2)
                             .foregroundStyle(.orange)
-                        Text("VitalDecode is a data reference tool, not a medical device.")
+                        Text("This app is not intended to diagnose, treat, cure, or prevent any disease or medical condition.")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
-                    Text("Always seek a doctor's advice in addition to using this app and before making any medical decisions.")
+                    Text("Users of this app must seek a doctor's advice in addition to using this app and before making any medical decisions.")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
